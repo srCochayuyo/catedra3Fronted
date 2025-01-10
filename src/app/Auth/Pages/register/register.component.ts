@@ -5,26 +5,27 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'login',
+  selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  imports: [CommonModule, ReactiveFormsModule],
+  providers: [AuthService],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
+export class RegisterComponent {
 
   loginForm!: FormGroup;
   error: boolean = false;
   errorMessage: string[] = [];
-  loginAlert: boolean = true;
+  registerlert: boolean = true;
   successMessage: string = "";
-
+  
   private authService = inject(AuthService)
-
+  
   constructor(private fb: FormBuilder, private router: Router) {
     this.formulario();
   }
-
+  
   formulario()
   {
     this.loginForm = this.fb.group({
@@ -32,59 +33,50 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
   } 
-
+  
   get emailValidate() 
   {
     return this.loginForm.get('email')?.invalid && this.loginForm.get('email')?.touched;
   }
-
+  
   get passwordValidate()
   {
     return this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched;
   }
-
- 
-  login() {
+  
+   
+  Register() {
     if(this.loginForm.invalid){
       Object.values(this.loginForm.controls).forEach((control) => {
         control.markAllAsTouched();
       });
-  
+    
       return;
     }
-  
-    this.authService.login(this.loginForm.value).subscribe({
+    
+    this.authService.register(this.loginForm.value).subscribe({
       next: (response) => {
-        if(response.token) {
-
-          this.error = false;
-          this.loginAlert = true;
-          this.successMessage = "Sesión iniciada con éxito."; 
-
-          this.router.navigate(['User']) 
-  
-        } else {
-          console.log('Error en login');
-          this.error = true;
-        }
-  
+    
+        this.error = false;
+        this.registerlert = true;
+        this.successMessage = "Registro Existoso.";       
+    
       },
       error: (error) => {
         this.error = true;
-        this.loginAlert = false;
-        
+        this.registerlert = false;
+          
         this.errorMessage = error.message;
-    
+      
         console.log('Error del backend:', this.errorMessage);
     }
     });
   }
 
-  toRegister()
+  toLogin()
   {
-    this.router.navigate(['Register']);
+    this.router.navigate(['']);
   }
-
-
+  
 
 }

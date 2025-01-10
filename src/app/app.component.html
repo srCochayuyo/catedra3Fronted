@@ -1,1 +1,4 @@
-<login></login>
+<div class="app-container">
+  <router-outlet></router-outlet>
+  <sideBar *ngIf="isTokenPresent()"></sideBar>
+</div>

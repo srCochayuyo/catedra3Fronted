@@ -1,0 +1,23 @@
+<div class="flex justify-center items-center min-h-screen">
+    <div class="w-full max-w-4xl">
+      <div *ngIf="posts.length === 0" class="text-center text-lg text-gray-700 mb-4">
+        No hay posts
+      </div>
+      <div *ngFor="let post of posts; let i = index" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-4">
+        <p *ngIf="!post.image">Sin imagen para el post {{ i }}</p>
+        <p *ngIf="!post.titulo">Sin título para el post {{ i }}</p>
+        <p *ngIf="!post.fechaPost">Sin fecha para el post {{ i }}</p>
+      
+        <a href="#">
+          <img *ngIf="post.image" class="rounded-t-lg" [src]="post.image" alt="{{ post.titulo }}" />
+        </a>
+        <div class="p-5">
+          <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ post.titulo }}</h5>
+          </a>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ post.fechaPost | date: 'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+      </div>
+    </div>
+</div>
+  

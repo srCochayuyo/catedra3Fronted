@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
     <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
-        <h5 class="text-xl font-medium text-gray-900 dark:text-white">Iniciar Sesión</h5>
+      <form [formGroup]="loginForm" (ngSubmit)="Register()" class="space-y-6">
+        <h5 class="text-xl font-medium text-gray-900 dark:text-white">Registrar</h5>
         <div>
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
           <input
@@ -29,13 +29,13 @@
           [disabled]="loginForm.invalid"
           class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Iniciar sesión
+          Registrar
         </button>
         <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-          ¿No tienes una cuenta? <button (click)="toRegister()" class="text-blue-700 hover:underline dark:text-blue-500">Crea una aquí</button>
+          ¿Ya tienes una cuenta? <button (click)="toLogin()" class="text-blue-700 hover:underline dark:text-blue-500">Inicia sesion aqui</button>
         </div>
         <div *ngIf="error" class="text-red-500 text-sm mt-2">{{ errorMessage }}</div>
-        <div *ngIf="loginAlert" class="text-green-500 text-sm mt-2">{{ successMessage }}</div>
+        <div *ngIf="registerlert" class="text-green-500 text-sm mt-2">{{ successMessage }}</div>
       </form>
     </div>
 </div>
