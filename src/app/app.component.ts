@@ -20,9 +20,6 @@ export class AppComponent implements OnInit{
     initFlowbite();
   }
 
-  isTokenPresent(): boolean {
-    
 
-    return localStorage.getItem('token') !== null;
-  }
+
 }

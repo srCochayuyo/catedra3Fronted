@@ -28,17 +28,17 @@ export class ListPostComponent implements OnInit {
     try {
       const observer = {
         next: (response: any) => {
-          console.log(response.posts);  // Verifica que response.posts es un array
-          this.posts = response.posts;  // Asigna el array de posts
+          console.log(response.posts);  
+          this.posts = response.posts;  
         },
         error: (error: any) => {
-          console.error(error);  // Maneja el error adecuadamente
+          console.error(error);  
         }
       };
   
       this.postService.getPost().subscribe(observer);
     } catch (error: any) {
-      console.error(error);  // Maneja cualquier otro error
+      console.error(error); 
     }
   }
 

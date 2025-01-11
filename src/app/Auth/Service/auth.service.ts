@@ -43,7 +43,7 @@ export class AuthService {
         let errorMessage = 'Error desconocido';
   
         if (error.error && Array.isArray(error.error)) {
-          errorMessage = error.error.join(', '); // Si el error es un array, unimos los mensajes
+          errorMessage = error.error.join(', '); 
         } else if (error.error && typeof error.error === 'string') {
           errorMessage = error.error;
         } else if (error.error && typeof error.error === 'object' && error.error.message) {

@@ -65,9 +65,8 @@ export class RegisterComponent {
       error: (error) => {
         this.error = true;
         this.registerlert = false;
-          
+        this.registerForm.get('password')?.reset();
         this.errorMessage = error.message;
-      
         console.log('Error del backend:', this.errorMessage);
     }
     });
