@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../../Service/post.service';
 import { Router, RouterModule } from '@angular/router';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css']
 })
-export class CreatePostComponent {
+export class CreatePostComponent implements OnInit {
 
   postForm!: FormGroup;
   error: boolean = false;
@@ -25,6 +25,9 @@ export class CreatePostComponent {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.formulario();
+  }
+  ngOnInit(): void {
+    console.log(this.router.config)
   }
 
   formulario() {

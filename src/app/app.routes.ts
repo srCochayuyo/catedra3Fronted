@@ -14,13 +14,19 @@ export const routes: Routes = [
     },
     {
         path: 'User',
-        loadComponent: () => import("../app/Post/Pages/list-post/list-post.component").then((m) => m.ListPostComponent),
+        loadComponent: () => import('../app/RouterPage/Page/router/router.component').then((m) => m.RouterComponent),
         canActivate:[authGuard],
         children: [
 
             {
+                
                 path: 'Postear',
                 loadComponent: () => import('../app/Post/Pages/create-post/create-post.component').then((m) => m.CreatePostComponent)
+
+            },
+            {
+                path: '',
+                loadComponent: () => import('../app/Post/Pages/list-post/list-post.component').then((m) => m.ListPostComponent)
             }
 
         ]
