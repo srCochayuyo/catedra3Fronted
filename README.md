@@ -5,7 +5,7 @@
 - [Flowbite] 
 - [CSS Tailwind]
 
-##Nota importante
+## Nota importante
 Para utilizar este proyecto Fronted necesitaras del Backend que encontraras en el siguiente repositorio de GitHub.
 ```sh
 git clone https://github.com/srCochayuyo/BackendCatedra3.git
