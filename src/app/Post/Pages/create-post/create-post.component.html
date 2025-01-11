@@ -1,0 +1,55 @@
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <form [formGroup]="postForm" (ngSubmit)="Postear()">
+      <div class="p-5">
+        <!-- Campo de título -->
+        <label for="titulo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título del post</label>
+        <input
+          type="text"
+          id="titulo"
+          formControlName="titulo"
+          class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+        />
+        <p *ngIf="tituloValidate" class="text-red-500 text-sm mt-2">El título es requerido.</p>
+  
+        <!-- Dropzone con vista previa -->
+        <div class="mt-4">
+          <label for="dropzone-file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
+          <div
+            class="flex items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500"
+          >
+            <input
+              id="dropzone-file"
+              type="file"
+              class="hidden"
+              (change)="onFileSelected($event)"
+            />
+            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-full">
+              <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span class="font-semibold">Click to upload</span> or drag and drop
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </label>
+          </div>
+          <p *ngIf="imageValidate" class="text-red-500 text-sm mt-2">La imagen es requerida.</p>
+  
+          <!-- Vista previa de la imagen -->
+          <div *ngIf="imagePreview" class="mt-4">
+            <img [src]="imagePreview" alt="Vista previa" class="w-full rounded-lg" />
+          </div>
+        </div>
+  
+        <!-- Botón para publicar -->
+        <button
+          type="submit"
+          class="mt-6 w-full inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Publicar
+        </button>
+      </div>
+    </form>
+</div>
+  

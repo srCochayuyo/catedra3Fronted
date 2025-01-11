@@ -17,6 +17,12 @@ export const routes: Routes = [
         loadComponent: () => import("../app/Post/Pages/list-post/list-post.component").then((m) => m.ListPostComponent),
         canActivate:[authGuard],
         children: [
+
+            {
+                path: 'Postear',
+                loadComponent: () => import('../app/Post/Pages/create-post/create-post.component').then((m) => m.CreatePostComponent)
+            }
+
         ]
     }
 

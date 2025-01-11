@@ -2,11 +2,12 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { GetPostsResponse, Post } from '../../Interfaces/getPostsResponse';
 import { PostService } from '../../Service/post.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'post',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   providers: [DatePipe,PostService],
   templateUrl: './list-post.component.html',
   styleUrl: './list-post.component.css'

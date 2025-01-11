@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterComponent {
 
-  loginForm!: FormGroup;
+  registerForm!: FormGroup;
   error: boolean = false;
   errorMessage: string[] = [];
   registerlert: boolean = true;
@@ -28,7 +28,7 @@ export class RegisterComponent {
   
   formulario()
   {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]], 
       password: ['', Validators.required]
     });
@@ -36,25 +36,25 @@ export class RegisterComponent {
   
   get emailValidate() 
   {
-    return this.loginForm.get('email')?.invalid && this.loginForm.get('email')?.touched;
+    return this.registerForm.get('email')?.invalid && this.registerForm.get('email')?.touched;
   }
   
   get passwordValidate()
   {
-    return this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched;
+    return this.registerForm.get('password')?.invalid && this.registerForm.get('password')?.touched;
   }
   
    
   Register() {
-    if(this.loginForm.invalid){
-      Object.values(this.loginForm.controls).forEach((control) => {
+    if(this.registerForm.invalid){
+      Object.values(this.registerForm.controls).forEach((control) => {
         control.markAllAsTouched();
       });
     
       return;
     }
     
-    this.authService.register(this.loginForm.value).subscribe({
+    this.authService.register(this.registerForm.value).subscribe({
       next: (response) => {
     
         this.error = false;
