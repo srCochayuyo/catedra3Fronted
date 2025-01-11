@@ -9,7 +9,7 @@ import { CreatePostComponent } from "./Post/Pages/create-post/create-post.compon
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, SideBarComponent],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

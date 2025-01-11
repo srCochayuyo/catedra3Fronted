@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'postear',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   providers: [PostService],
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css']
@@ -17,15 +17,19 @@ export class CreatePostComponent implements OnInit {
   postForm!: FormGroup;
   error: boolean = false;
   errorMessage: string[] = [];
-  postAlert: boolean = true;
+  postAlert: boolean = false;
   successMessage: string = "";
-  imagePreview: string | ArrayBuffer | null = null; 
+  imagePreview: string | ArrayBuffer | null = null;
+  isDragOver = false;
+  isLoading: boolean = false;
+
 
   private postService = inject(PostService);
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.formulario();
   }
+
   ngOnInit(): void {
     console.log(this.router.config)
   }
@@ -51,13 +55,38 @@ export class CreatePostComponent implements OnInit {
       this.postForm.patchValue({ image: file });
       this.postForm.get('image')?.markAsTouched();
 
-      // Generar vista previa
       const reader = new FileReader();
       reader.onload = () => {
-        this.imagePreview = reader.result; 
+        this.imagePreview = reader.result;
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault(); 
+    this.isDragOver = true;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+    
+    const file = event.dataTransfer?.files[0];
+    if (file) {
+      this.postForm.patchValue({ image: file });
+      this.postForm.get('image')?.markAsTouched();
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onDragLeave(event: DragEvent) {
+    this.isDragOver = false;
   }
 
   Postear() {
@@ -68,26 +97,36 @@ export class CreatePostComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+
     const formData = new FormData();
     formData.append('titulo', this.postForm.get('titulo')?.value);
     formData.append('image', this.postForm.get('image')?.value);
 
     this.postService.Postear(formData).subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.error = false;
         this.postAlert = true;
         this.successMessage = 'Post creado con éxito.';
+
+        this.postForm.reset();
+        this.imagePreview = null;
       },
       error: (error) => {
         this.error = true;
         this.postAlert = false;
         this.errorMessage = error.message;
         console.log('Error del backend:', this.errorMessage);
+
+        
+        this.imagePreview = null;
+        this.postForm.get('image')?.reset(); 
       }
     });
   }
 
-  toLogin() {
-    this.router.navigate(['']);
+  Prev() {
+    this.router.navigate(['User/']);
   }
 }
